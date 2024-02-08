@@ -33,14 +33,51 @@
     \title{Docker}
     \begin{document}
     \maketitle
+    \section{Converter aplicação para imagem}
+        \subsection{Dockerfile}
+            \begin{lstlisting}
+                FROM <plataforma>:<sistema_operacional>
+                COPY <origem> / < destino>
+                WORKDIR <diretorio_trabalho>
+                CMD <comando_run>
+            \end{lstlisting}
+            \subsubsection{Construindo imagem}
+                \begin{lstlisting}
+                    #construindo diretorio local
+                    docker build -t <nome_imagem>
+                    #vizualizando as imagens
+                    docker images 
+                \end{lstlisting}
+
     \section{Application}
-    \begin{lstlisting}
-        FROM node:12- alpine #adiciona alinguagem e o sistema operacional 
-        WORKDIR /App #Especificao direroiro de trabalho
-        COPY .. # Copia todo diretorio
+        \subsection{Adicionando sistemas operacionais}
+            \begin{lstlisting}
+                FROM node:12- alpine #adiciona alinguagem e o sistema operacional 
+                WORKDIR /App #Especificao direroiro de trabalho
+                COPY .. # Copia todo diretorio
+            \end{lstlisting}
+        \subsection{Comando RUN}
+            \begin{lstlisting}
+                FROM node:12-alpine #image do docker hub
 
+                WORKDIR /app # diretorio do image
 
-    \end{lstlisting}
+                COPY . . # copia dos arquivos
+
+                ADD https://microsoft.com/teste.json .% copia dos arquivos online compactados ou descompactados
+                RUN apk add --no-cache python2 g++ make % adiconando python no alpine linux
+                CMD [ ]
+            \end{lstlisting}    
+            \textcolor{red}{RUN apk add --no-cache python2 g++ make}
+            \begin{itemize}
+                \item apk: é o utilitário de gerenciamento de pacotes do Alpine Linux.
+                \item add: é o subcomando utilizado para adicionar pacotes.
+                \item --no-cache: é uma opção que instrui o apk a não salvar o índice localmente após a instalação, o que economiza espaço em disco, mas também significa que não será possível atualizar ou reinstalar pacotes sem uma conexão com a internet.
+                \item python2: é o pacote do Python 2 que será instalado.
+                \item g++: é o compilador C++.
+                \item make: é uma ferramenta de automação de compilação utilizada principalmente para compilar e construir projetos de software
+            \end{itemize}
+        
     
 
     \end{document}
